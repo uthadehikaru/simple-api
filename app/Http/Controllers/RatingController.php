@@ -85,7 +85,7 @@ class RatingController extends Controller
 
             $data['ratings'] = [];
             foreach($user->ratings as $rating){
-                $data['ratings'] = [
+                $data['ratings'][] = [
                     'created_at' => $rating->created_at,
                     'updated_at' => $rating->updated_at,
                     'sender' => $rating->sender->name,
