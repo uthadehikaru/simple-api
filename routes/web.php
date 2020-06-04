@@ -18,3 +18,8 @@ $router->get('/', function () use ($router) {
 });
 
 $router->post('/register','UsersController@register');
+$router->group(['middleware' => 'auth:api'], function () use ($router) {
+    $router->post('/rating/add','RatingController@add');
+    $router->post('/rating/get','RatingController@get');
+    $router->post('/rating/history','RatingController@history');
+});
