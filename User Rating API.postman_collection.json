@@ -1,0 +1,196 @@
+{
+	"variables": [],
+	"info": {
+		"name": "User Rating API",
+		"_postman_id": "d2c69ff0-66ba-7733-0728-d2eefcf9b7f5",
+		"description": "Provide simple API to give rating a user, get average rating and rating history",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "check API",
+			"request": {
+				"url": "{{SITE_URL}}",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"va_numbers\": [\n    {\n      \"va_number\": \"71758667387407\",\n      \"bank\": \"bca\"\n    }\n  ],\n  \"transaction_time\": \"2020-05-20 19:37:51\",\n  \"transaction_status\": \"settlement\",\n  \"transaction_id\": \"30ab2449-ced7-44b7-bb8c-dcd3c05b9b32\",\n  \"status_message\": \"midtrans payment notification\",\n  \"status_code\": \"200\",\n  \"signature_key\": \"3b360201c84ad3ded30d0b496b4ffaa5bc4a81ea2f6bc1ca40b48faeb5b39d18b3b964b8c2717842146f42cc810100b5133b4420eac4f5db4f26d1994aa8c399\",\n  \"settlement_time\": \"2020-05-20 19:38:19\",\n  \"payment_type\": \"bank_transfer\",\n  \"payment_amounts\": [\n\n  ],\n  \"order_id\": \"20200500003\",\n  \"merchant_id\": \"G071758667\",\n  \"gross_amount\": \"30000.00\",\n  \"fraud_status\": \"accept\",\n  \"currency\": \"IDR\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"request": {
+				"url": "{{SITE_URL}}/register",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "User 2",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "user2@mailinator.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "user2pass",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "register user"
+			},
+			"response": []
+		},
+		{
+			"name": "request token",
+			"request": {
+				"url": "{{SITE_URL}}/v1/oauth/token",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "2",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "zZQBbHZKkcmSFKoHMRRreBsaw5gpsRiHMoQ0Uplz",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "kuhn.annabelle@yahoo.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "request token for registered user"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Rating",
+			"request": {
+				"url": "{{SITE_URL}}/rating/add",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{USER_TOKEN}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "recipient_id",
+							"value": "2",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "rating",
+							"value": "3",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "add rating to user. if already exists, update rating instead"
+			},
+			"response": []
+		},
+		{
+			"name": "get rating",
+			"request": {
+				"url": "{{SITE_URL}}/rating/get",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{USER_TOKEN}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "get specified user average rating"
+			},
+			"response": []
+		},
+		{
+			"name": "get history",
+			"request": {
+				"url": "{{SITE_URL}}/rating/history",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{USER_TOKEN}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "6",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "get user specified rating history"
+			},
+			"response": []
+		}
+	]
+}
